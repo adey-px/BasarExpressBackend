@@ -2,10 +2,14 @@ import express from 'express';
 
 const app = express();
 
+// Endpoint for new user registration
+app.post('/api/1.0/users', (req, res) => {
+  return res.send({
+    message: 'Your account has been created',
+  });
+});
 
 
 
 
-app.listen(5000, () => 
-    console.log('App connected to server...')
-);
+export default app;
