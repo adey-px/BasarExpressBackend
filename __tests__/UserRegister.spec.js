@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app from '../app'
+import app from '../app';
 import sequelize from '../source/db-config/database';
 import User from '../source/user-model/User';
 
@@ -86,5 +86,23 @@ describe('User Registration', () => {
         });
       });
   });
+  //
+  it('Hash user password sent to db', (done) => {
+    request(app)
+      .post('/api/1.0/users')
+      .send({
+        username: 'user1',
+        email: 'user1@email.com',
+        password: 'Pass2word',
+      })
+      .then(() => {
+        User.findAll().then((userList) => {
+          const createdUser = userList[0];
+          expect(createdUser.password).not.toBe('Pass2word');
+        
+          done();
+        });
+      });
+  })
 });
 

@@ -1,5 +1,6 @@
 import express from 'express';
 import User from './source/user-model/User.js';
+import bcrypt from 'bcrypt';
 
 
 const app = express();
@@ -9,13 +10,24 @@ app.use(express.json());
 
 // Endpoint for new user registration
 app.post('/api/1.0/users', (req, res) => {
-  User
-    .create(req.body)
-    .then(() => {
+  bcrypt
+    .hash(req.body.password, 10)
+    .then((hash) => {
+      // const user = {...req.body, password: hash};
+      const user = {
+        username: req.body.username,
+        email: req.body.email,
+        password: hash,
+    };
+
+    User
+      .create(user)
+      .then(() => {
       return res.send({
         message: 'Your account has been created',
       });
-    }) 
+    });
+  });
 });
 
 
