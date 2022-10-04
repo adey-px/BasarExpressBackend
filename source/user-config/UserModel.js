@@ -1,11 +1,12 @@
 import { Sequelize } from "sequelize";
-import sequelize from "../db-config/database.js";
+import sequelize from "../db-config/Database.js";
 
 // Model for user registration api endpoint
 const Model = Sequelize.Model;
-class User extends Model { }
+//
+class UserModel extends Model { }
 
-User.init(
+UserModel.init(
     {
         username: {
             type: Sequelize.STRING,
@@ -25,4 +26,4 @@ User.init(
 );
 
 
-export default User;
+export default UserModel;

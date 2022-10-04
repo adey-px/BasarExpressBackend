@@ -1,0 +1,10 @@
+{
+    "database": {
+        "name": "db-server",
+        "username": "admin",
+        "password": "pa55word",
+        "dialect": "sqlite",
+        "storage": "./db-dev.sqlite",
+        "logging": false
+    }
+}
